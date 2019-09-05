@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Mina&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Space+Mono&display=swap');
+
+
+
+header{
+    height: 120px;
+    font-family: 'Space Mono', monospace;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 40px;
+    color: silver;
+    text-align: left;
+    padding: 10px;
+}
+
+body{
+    background-image: url("../images/file.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 1600px;
+}
+
+#questionArea{
+    background-color: red;
+    margin: 20px 0px 20px 0px;
+    padding: 10px;
+}
+
+footer{
+    bottom: 0px;
+    position: fixed;
+    height: 20px;
+    width: 100%;
+    background-color: silver;
+    text-align: center;
+    font-size: 10px;
+    color: black;
+}
+
+#gamesWon {
+    font-size: 30px;
+}
+
+#gamesLost {
+    font-size: 30px;
+}
+
+.score{
+    font-size: 75px;
+}
+
+.caption {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* #scoreBoard {
+    position: relative;
+    top:100px;
+    height: 100px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Mina', sans-serif;
+    font-weight: bold;
+    color: yellow;
+} */
+
+
+@media screen and (max-width: 979px){
+    header { font-size: 40px; }
+    #scoreBoardMsg { font-size: 30px;}
+    #scoreBoard { font-size: 25px;
+        line-height: 30px; }
+    #gamesWon { font-size: 25px; }
+    #gamesLost { font-size: 25px; }
+    
+}
+
+
+@media screen and (max-width: 767px){
+    header { font-size: 30px; }
+    #subHeading { font-size: 15px; }
+    #scoreBoardMsg { font-size: 20px;}
+    #scoreBoard { font-size: 15px;
+        line-height: 20px; }
+    #gamesWon { font-size: 12px; }
+    #gamesLost { font-size: 12px; }
+    }     
+    
+@media screen and (max-width: 639px){
+    header { font-size: 20px; }
+    #scoreBoardMsg { font-size: 20px;}
+    #scoreBoard { font-size: 15px;
+                    line-height: 15px; }
+    #gamesWon { font-size: 12px; }
+    #gamesLost { font-size: 12px; }
+}
