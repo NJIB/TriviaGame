@@ -15,7 +15,7 @@ header{
 }
 
 body{
-    background-image: url("../images/file.jpg");
+    /* background-image: url("../images/file.jpg"); */
     background-repeat: no-repeat;
     background-size: 100% 1600px;
 }
