@@ -70,7 +70,8 @@ function askTriviaQ() {
 
     $("#questionArea").html(triviaQ[i].question);
     console.log("Question: " + triviaQ[i].question);
-    $("#Ans1").html(triviaQ[i].response[0]);
+    // $("#image1").html("<img src='assets/images/scotland.jpg' width=150 height=150 />");
+    $("#Ans1").html(triviaQ[i].response[0]);    
     console.log("Response 1: " + triviaQ[i].response[0]);
     $("#Ans2").html(triviaQ[i].response[1]);
     console.log("Response 2: " + triviaQ[i].response[1]);
