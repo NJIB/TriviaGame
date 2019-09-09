@@ -20,9 +20,7 @@ header{
 }
 
 body{
-    /* background-image: url("../images/file.jpg"); */
-    background-repeat: no-repeat;
-    background-size: 100% 1600px;
+    background-color: lightskyblue;
 }
 
 #Timer {
@@ -31,10 +29,20 @@ body{
     font-size: 50px;
 }
 
-#questionArea{
-    background-color: red;
-    margin: 20px 0px 20px 0px;
+#questionNumber{
+    font-size: 20px;
+    margin: 20px 0px 0px 0px;
     padding: 10px;
+}
+
+#questionArea{
+    font-size: 35px;
+    margin: 0px 0px 20px 0px;
+    padding: 10px;
+}
+
+#flagArea{
+    /* background-color: white; */
 }
 
 footer{
@@ -59,24 +67,6 @@ footer{
 .score{
     font-size: 75px;
 }
-
-.caption {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* #scoreBoard {
-    position: relative;
-    top:100px;
-    height: 100px;
-    box-sizing: border-box;
-    text-align: center;
-    font-size: 25px;
-    font-family: 'Mina', sans-serif;
-    font-weight: bold;
-    color: yellow;
-} */
-
 
 @media screen and (max-width: 979px){
     header { font-size: 40px; }

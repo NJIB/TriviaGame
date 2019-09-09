@@ -9,79 +9,129 @@ var countdownTimer;
 
 var triviaQ = [
     {
-        question: "Is the answer A, B, C, or D?",
-        response: ["A", "B", "C", "D"],
-        correctAns: "A"
-    },
-    {
-        question: "Is the answer E, F, G, or H?",
-        response: ["E", "F", "G", "H"],
+        question: "Let's start with an easy one.  Which of these is the flag of Canada?",
+        response: ["United Kingdom", "Canada", "USA", "China"],
         correctAns: "B"
     },
     {
-        question: "Is the answer I, J, K, or L?",
-        response: ["I", "J", "K", "L"],
-        correctAns: "C"
-    },
-    {
-        question: "Is the answer M, N, O, or P?",
-        response: ["M", "N", "O", "P"],
+        question: "We're off to Scandinavia.  Which of these is the flag for Norway?",
+        response: ["Finland", "Sweden", "Denmark", "Norway"],
         correctAns: "D"
     },
     {
-        question: "Is the answer Q, R, S, or T?",
-        response: ["Q", "R", "S", "T"],
+        question: "Okay, South America here we come!  Which of these is the flag of Brazil?",
+        response: ["Brazil", "Argentina", "Chile", "Uruguay"],
         correctAns: "A"
     },
     {
-        question: "Is the answer A, B, C, or D?",
-        response: ["A", "B", "C", "D"],
-        correctAns: "A"
+        question: "That was easy - but they will get harder.  Which of these is the flag of England?",
+        response: ["Scotland", "Wales", "England", "Northern Ireland"],
+        correctAns: "C"
     },
     {
-        question: "Is the answer E, F, G, or H?",
-        response: ["E", "F", "G", "H"],
+        question: "Which of these is the flag of Portugal?",
+        response: ["Spain", "Portugal", "France", "Italy"],
         correctAns: "B"
     },
     {
-        question: "Is the answer I, J, K, or L?",
-        response: ["I", "J", "K", "L"],
-        correctAns: "C"
-    },
-    {
-        question: "Is the answer M, N, O, or P?",
-        response: ["M", "N", "O", "P"],
+        question: "Okay, a tough one: Which of these is the flag of Peru?",
+        response: ["Austria", "Monaco", "Hungary", "Peru"],
         correctAns: "D"
     },
     {
-        question: "Is the answer Q, R, S, or T?",
-        response: ["Q", "R", "S", "T"],
+        question: "Let's make our way to North Africa.  Which of these is the flag of Morocco? Take your time.",
+        response: ["Morocco", "Algeria", "Tunisia", "Egypt"],
         correctAns: "A"
+    },
+    {
+        question: "Fan of a tricolore?  Which of these 3-colored flag is flown in the Republic of Ireland",
+        response: ["Italy", "Hungary", "Republic of Ireland", "The Netherlands"],
+        correctAns: "C"
+    },
+    {
+        question: "Time to head to Asia?  Which of these is the flag for Hong Kong?",
+        response: ["China", "Hong Kong", "Taiwan", "South Korea"],
+        correctAns: "B"
+    },
+    {
+        question: "Let's stay in Asia.  Which of these is the flag of North Korea?",
+        response: ["North Korea", "Indonesia", "Malaysia", "Philippines"],
+        correctAns: "A"
+    },
+    {
+        question: "Now it's getting really tough.  Which of these is the flag of Austria?",
+        response: ["Austria", "Peru", "Monaco", "Hungary"],
+        correctAns: "A"
+    },
+    {
+        question: "Okay, which of these is the flag of Mexico?",
+        response: ["India", "Republic of Ireland", "Mexico", "Hungary"],
+        correctAns: "C"
+    },
+    {
+        question: "Time to set a course for Central America.  Can you find the flag for Nicaragua?",
+        response: ["Belize", "Nicaragua", "Honduras", "Costa Rica"],
+        correctAns: "B"
+    },
+    {
+        question: "All these flags making you feel blue?  Keep going!  Which of these blue flags represents Uruguay?",
+        response: ["Uruguay", "El Salvador", "Nicaragua", "Honduras"],
+        correctAns: "A"
+    },
+    {
+        question: "I admit, this one is just cruel.  Which of these flags would you find flying in Colombia?",
+        response: ["Bolivia", "Peru", "Venezuela", "Colombia"],
+        correctAns: "D"
+    },
+    {
+        question: "Flagging yet?.  Hope not.  Which of these is the Pakistani flag?",
+        response: ["India", "Pakistan", "Sri Lanka", "Bangladesh"],
+        correctAns: "B"
+    },
+    {
+        question: "Back to Europe for a blur of color.  Which of these is the flag of Luxembourg?",
+        response: ["Belgium", "The Netherlands", "Germany", "Luxembourg"],
+        correctAns: "D"
+    },
+    {
+        question: "Seeing stars?  Hope so.  Because you now need to find the flag of New Zealand?",
+        response: ["Australia", "New Zealand", "Israel", "Morocco"],
+        correctAns: "B"
+    },
+    {
+        question: "Almost there.  But first back to the Middle East.  Which of these is the flag of Lebanon?",
+        response: ["Jordan", "Israel", "Lebanon", "Egypt"],
+        correctAns: "D"
+    },
+    {
+        question: "Let's take a trip to Eastern Europe.  Which of these is the flag of Bulgaria?",
+        response: ["Bulgaria", "Romania", "Serbia", "Hungary"],
+        correctAns: "D"
     }
+
 ]
 
 function askTriviaQ() {
 
     if (i >= triviaQ.length) {
         displayFinalScore();
-    } else 
-    {
-    $("#scoreBoard").html("Question " + (i + 1) + " of " + triviaQ.length);
+    } else {
+        clearAnswers();
+        $("#questionNumber").html("Question " + (i + 1) + " of " + triviaQ.length);
 
-    $("#questionArea").html(triviaQ[i].question);
-    console.log("Question: " + triviaQ[i].question);
-    // $("#image1").html("<img src='assets/images/scotland.jpg' width=150 height=150 />");
-    $("#Ans1").html(triviaQ[i].response[0]);    
-    console.log("Response 1: " + triviaQ[i].response[0]);
-    $("#Ans2").html(triviaQ[i].response[1]);
-    console.log("Response 2: " + triviaQ[i].response[1]);
-    $("#Ans3").html(triviaQ[i].response[2]);
-    console.log("Response 3: " + triviaQ[i].response[2]);
-    $("#Ans4").html(triviaQ[i].response[3]);
-    console.log("Response 4: " + triviaQ[i].response[3]);
-    console.log("correctAns: " + triviaQ[i].correctAns);
+        $("#questionArea").html(triviaQ[i].question);
+        console.log("Question: " + triviaQ[i].question);
+        $("#image1").html("<img src='assets/images/" + triviaQ[i].response[0] + ".png' width=150 height=100 />");
+        console.log("Response 1: " + triviaQ[i].response[0]);
+        $("#image2").html("<img src='assets/images/" + triviaQ[i].response[1] + ".png' width=150 height=100 />");
+        console.log("Response 2: " + triviaQ[i].response[1]);
+        $("#image3").html("<img src='assets/images/" + triviaQ[i].response[2] + ".png' width=150 height=100 />");
+        console.log("Response 3: " + triviaQ[i].response[2]);
+        $("#image4").html("<img src='assets/images/" + triviaQ[i].response[3] + ".png' width=150 height=100 />");
+        console.log("Response 4: " + triviaQ[i].response[3]);
+        console.log("correctAns: " + triviaQ[i].correctAns);
 
-    displayTimer();
+        displayTimer();
     }
 }
 
@@ -95,33 +145,52 @@ responseBtn.on('click', function (evt) {
     if (playerResponse === triviaQ[i].correctAns) {
         score++;
         $("#scoreBoard").html("Correct! Your score is " + score);
+        displayAnswers();
         console.log("i : " + i);
         console.log("Score: " + score);
         // Wait 1.5 seconds before main question timer is reset next question appears
         clearTimeout(countdownTimer);
         var pauseVar = setTimeout(function () {
-            $("#scoreBoard").text("");         
+            $("#scoreBoard").text("");
             i++;
-            askTriviaQ();    
+            askTriviaQ();
         }
             , 1500);
     } else {
         $("#scoreBoard").html("Incorrect - the correct answer is " + triviaQ[i].correctAns);
+        displayAnswers();
         // Wait 1.5 seconds before main question timer is reset next question appears
         clearTimeout(countdownTimer);
         var pauseVar = setTimeout(function () {
             // window.clearTimeout(timerVar);
-            $("#scoreBoard").text("");         
+            $("#scoreBoard").text("");
             i++;
-            askTriviaQ();           
+            askTriviaQ();
         }
             , 1500);
     }
 });
 
+// Display answers
+function displayAnswers() {
+    $("#image1").append(triviaQ[i].response[0]);
+    $("#image2").append(triviaQ[i].response[1]);
+    $("#image3").append(triviaQ[i].response[2]);
+    $("#image4").append(triviaQ[i].response[3]);
+}
+
+// Display answers
+function clearAnswers() {
+    $("#Ans1").html("");
+    $("#Ans2").html("");
+    $("#Ans3").html("");
+    $("#Ans4").html("");
+}
+
+
 // Count down timer
 function displayTimer() {
-    var t = 30;
+    var t = 10;
     countdownTimer = setInterval(function () {
         $("#Timer").text(t + " seconds")
         t = t - 1;
