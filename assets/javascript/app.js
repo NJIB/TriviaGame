@@ -6,8 +6,21 @@ var i = 0;  // Count incrementor
 var playMode = false;  //Play mode
 var t = 20;  // Time per question
 var score = 0;  // Game score
-var gameStarted = false;
-var countdownTimer;
+var gameStarted = false;  // Used to activate the start button, and display main content at the right time
+var countdownTimer; // Main timer variable
+var flagClicked = 0;  // Indicator to prevent a flag being clicked twice (and messing up the sequence)
+
+var k1 = 0;
+var k2 = 0;
+var l1 = 0;
+var l2 = 0;
+var m1 = 0;
+var m2 = 0;
+var n1 = 0;
+var n2 = 0;
+
+
+
 
 var triviaQ = [
     {
@@ -44,87 +57,88 @@ var triviaQ = [
         question: "Let's make our way to North Africa.  Which of these is the flag of Morocco? Take your time.",
         response: ["Morocco", "Algeria", "Tunisia", "Egypt"],
         correctAns: "A"
-    },
-    {
-        question: "Fan of a tricolore?  Which of these 3-colored flag is flown in the Republic of Ireland",
-        response: ["Italy", "Hungary", "Republic of Ireland", "The Netherlands"],
-        correctAns: "C"
-    },
-    {
-        question: "Going round in circles?  Find the Turkish flag from these.",
-        response: ["Turkey", "Bangladesh", "Japan", "Brazil"],
-        correctAns: "A"
-    },
-    {
-        question: "Time to head to Asia?  Which of these is the flag for Hong Kong?",
-        response: ["China", "Hong Kong", "Taiwan", "South Korea"],
-        correctAns: "B"
-    },
-    {
-        question: "Let's stay in Asia.  Which of these is the flag of North Korea?",
-        response: ["North Korea", "Indonesia", "Malaysia", "Philippines"],
-        correctAns: "A"
-    },
-    {
-        question: "Now it's getting really tough.  Which of these is the flag of Austria?",
-        response: ["Austria", "Peru", "Monaco", "Hungary"],
-        correctAns: "A"
-    },
-    {
-        question: "Okay, which of these is the flag of Mexico?",
-        response: ["India", "Republic of Ireland", "Mexico", "Hungary"],
-        correctAns: "C"
-    },
-    {
-        question: "Time to set a course for Central America.  Can you find the flag for Nicaragua?",
-        response: ["Belize", "Nicaragua", "Honduras", "Costa Rica"],
-        correctAns: "B"
-    },
-    {
-        question: "All these flags making you feel blue?  Keep going!  Which of these blue flags represents Uruguay?",
-        response: ["Uruguay", "El Salvador", "Nicaragua", "Honduras"],
-        correctAns: "A"
-    },
-    {
-        question: "I admit, this one is just cruel.  Which of these flags would you find flying in Colombia?",
-        response: ["Bolivia", "Peru", "Venezuela", "Colombia"],
-        correctAns: "D"
-    },
-    {
-        question: "Flagging yet?  Hope not.  Which of these is the Pakistani flag?",
-        response: ["India", "Pakistan", "Sri Lanka", "Bangladesh"],
-        correctAns: "B"
-    },
-    {
-        question: "Back to Europe for a blur of color.  Which of these is the flag of Luxembourg?",
-        response: ["Belgium", "The Netherlands", "Germany", "Luxembourg"],
-        correctAns: "D"
-    },
-    {
-        question: "Seeing stars?  Hope so.  Because you now need to find the flag of New Zealand?",
-        response: ["Australia", "Israel", "New Zealand", "Morocco"],
-        correctAns: "B"
-    },
-    {
-        question: "Almost there.  But first back to the Middle East.  Which of these is the flag of Lebanon?",
-        response: ["Jordan", "Israel", "Lebanon", "Egypt"],
-        correctAns: "C"
-    },
-    {
-        question: "Let's take a trip to Eastern Europe.  Which of these is the flag of Bulgaria?",
-        response: ["Bulgaria", "Romania", "Serbia", "Hungary"],
-        correctAns: "A"
-    },
-    {
-        question: "Getting cross yet?  Find the Icelandic flag from these.",
-        response: ["Norway", "England", "Iceland", "Finland"],
-        correctAns: "C"
-    },
-    {
-        question: "Find the Indonesian flag from these.",
-        response: ["Monaco", "Austria", "Singapore", "Indonesia"],
-        correctAns: "D"
     }
+    // ,
+    // {
+    //     question: "Fan of a tricolore?  Which of these 3-colored flag is flown in the Republic of Ireland",
+    //     response: ["Italy", "Hungary", "Republic of Ireland", "The Netherlands"],
+    //     correctAns: "C"
+    // },
+    // {
+    //     question: "Going round in circles?  Find the Turkish flag from these.",
+    //     response: ["Turkey", "Bangladesh", "Japan", "Brazil"],
+    //     correctAns: "A"
+    // },
+    // {
+    //     question: "Time to head to Asia?  Which of these is the flag for Hong Kong?",
+    //     response: ["China", "Hong Kong", "Taiwan", "South Korea"],
+    //     correctAns: "B"
+    // },
+    // {
+    //     question: "Let's stay in Asia.  Which of these is the flag of North Korea?",
+    //     response: ["North Korea", "Indonesia", "Malaysia", "Philippines"],
+    //     correctAns: "A"
+    // },
+    // {
+    //     question: "Now it's getting really tough.  Which of these is the flag of Austria?",
+    //     response: ["Austria", "Peru", "Monaco", "Hungary"],
+    //     correctAns: "A"
+    // },
+    // {
+    //     question: "Okay, which of these is the flag of Mexico?",
+    //     response: ["India", "Republic of Ireland", "Mexico", "Hungary"],
+    //     correctAns: "C"
+    // },
+    // {
+    //     question: "Time to set a course for Central America.  Can you find the flag for Nicaragua?",
+    //     response: ["Belize", "Nicaragua", "Honduras", "Costa Rica"],
+    //     correctAns: "B"
+    // },
+    // {
+    //     question: "All these flags making you feel blue?  Keep going!  Which of these blue flags represents Uruguay?",
+    //     response: ["Uruguay", "El Salvador", "Nicaragua", "Honduras"],
+    //     correctAns: "A"
+    // },
+    // {
+    //     question: "I admit, this one is just cruel.  Which of these flags would you find flying in Colombia?",
+    //     response: ["Bolivia", "Peru", "Venezuela", "Colombia"],
+    //     correctAns: "D"
+    // },
+    // {
+    //     question: "Flagging yet?  Hope not.  Which of these is the Pakistani flag?",
+    //     response: ["India", "Pakistan", "Sri Lanka", "Bangladesh"],
+    //     correctAns: "B"
+    // },
+    // {
+    //     question: "Back to Europe for a blur of color.  Which of these is the flag of Luxembourg?",
+    //     response: ["Belgium", "The Netherlands", "Germany", "Luxembourg"],
+    //     correctAns: "D"
+    // },
+    // {
+    //     question: "Seeing stars?  Hope so.  Because you now need to find the flag of New Zealand?",
+    //     response: ["Australia", "Israel", "New Zealand", "Morocco"],
+    //     correctAns: "B"
+    // },
+    // {
+    //     question: "Almost there.  But first back to the Middle East.  Which of these is the flag of Lebanon?",
+    //     response: ["Jordan", "Israel", "Lebanon", "Egypt"],
+    //     correctAns: "C"
+    // },
+    // {
+    //     question: "Let's take a trip to Eastern Europe.  Which of these is the flag of Bulgaria?",
+    //     response: ["Bulgaria", "Romania", "Serbia", "Hungary"],
+    //     correctAns: "A"
+    // },
+    // {
+    //     question: "Getting cross yet?  Find the Icelandic flag from these.",
+    //     response: ["Norway", "England", "Iceland", "Finland"],
+    //     correctAns: "C"
+    // },
+    // {
+    //     question: "Find the Indonesian flag from these.",
+    //     response: ["Monaco", "Austria", "Singapore", "Indonesia"],
+    //     correctAns: "D"
+    // }
 
 
 ]
@@ -132,70 +146,60 @@ var triviaQ = [
 function askTriviaQ() {
     // Only populate question if game has started
     if (gameStarted === false) {
+    }
+    else {
+        clearAnswers();
+        flagClicked = 0;
+        $("#questionNumber").html("Question " + (i + 1) + " of " + triviaQ.length);
+        $("#questionArea").html(triviaQ[i].question);
+        $("#image1").html("<img src='assets/images/" + triviaQ[i].response[0] + ".png' width=150 height=100 />");
+        $("#image2").html("<img src='assets/images/" + triviaQ[i].response[1] + ".png' width=150 height=100 />");
+        $("#image3").html("<img src='assets/images/" + triviaQ[i].response[2] + ".png' width=150 height=100 />");
+        $("#image4").html("<img src='assets/images/" + triviaQ[i].response[3] + ".png' width=150 height=100 />");
 
-    } else {
-        // If more questions to be asked, populate questions and appropriate flags
-        if (i <= triviaQ.length) {
-            clearAnswers();
-            $("#questionNumber").html("Question " + (i + 1) + " of " + triviaQ.length);
-            $("#questionArea").html(triviaQ[i].question);
-            $("#image1").html("<img src='assets/images/" + triviaQ[i].response[0] + ".png' width=150 height=100 />");
-            $("#image2").html("<img src='assets/images/" + triviaQ[i].response[1] + ".png' width=150 height=100 />");
-            $("#image3").html("<img src='assets/images/" + triviaQ[i].response[2] + ".png' width=150 height=100 />");
-            $("#image4").html("<img src='assets/images/" + triviaQ[i].response[3] + ".png' width=150 height=100 />");
-
-            // Display count down timer
+        // Display count down timer, if still questions to be asked
+        if (i < triviaQ.length) {
             displayTimer();
-        } else
-            // If all questions asked, display final score
-            displayFinalScore();
+        }
     }
 }
-
 
 // Detect what player clicks
 var responseBtn = $('.number');
 responseBtn.on('click', function (evt) {
-    playerResponse = this.value;
 
-    if (playerResponse === triviaQ[i].correctAns) {
-        score++;
-        $("#resultMessage").html("Correct! The answer is " + triviaQ[i].correctAns);
-        $("#scoreBoard").html("Your score: " + score + "/" + (i + 1));
+    // Set flagClicked to 'clicked'
+    flagClicked++;
 
-        // Display country names
-        displayAnswers();
+    // Only register first click
+    if (flagClicked === 1) {
 
-        // Increment counter for next loop
-        i++;
+        // Register which flag the player selected
+        playerResponse = this.value;
 
-        // Wait 1.5 seconds before main question timer is reset next question appears
-        clearTimeout(countdownTimer);
-        var pauseVar = setTimeout(function () {
-            $("#resultMessage").text("");
-            // Trigger next question
-            askTriviaQ();
+        // IF the player guesses correctly, display congratulatory message and increment score
+        if (playerResponse === triviaQ[i].correctAns) {
+            score++;
+            $("#resultMessage").html("Correct! The answer is " + triviaQ[i].correctAns);
+            $("#scoreBoard").html("Your score: " + score + "/" + (i + 1));
+
+            // Display country names
+            displayAnswers();
+
+            // If all questions asked, display final score
+            displayFinalScore();
+
+            // If player guesses incorrectly, display message and update score    
+        } else {
+            $("#resultMessage").html("Incorrect - the correct answer is " + triviaQ[i].correctAns);
+            $("#scoreBoard").html("Your score: " + score + "/" + (i + 1));
+
+            // Display country names
+            displayAnswers();
+
+            // Check questions left, or trigger next question
+            displayFinalScore();
         }
-            , 1500);
-    } else {
-        $("#resultMessage").html("Incorrect - the correct answer is " + triviaQ[i].correctAns);
-        $("#scoreBoard").html("Your score: " + score + "/" + (i + 1));
-
-        displayAnswers();
-
-        // Increment counter for next loop
-        i++;
-
-        // Wait 1.5 seconds before main question timer is reset next question appears
-        clearTimeout(countdownTimer);
-        var pauseVar = setTimeout(function () {
-            // window.clearTimeout(timerVar);
-            $("#resultMessage").text("");
-
-            // Trigger next question
-            askTriviaQ();
-        }
-            , 1500);
     }
 });
 
@@ -223,35 +227,106 @@ function displayTimer() {
     } else {
         t = 10;
     }
-    console.log("t: " + t);
+    // Start timer
     countdownTimer = setInterval(function () {
         $("#Timer").text(t + " seconds")
         t = t - 1;
         if (t <= 0) {
-            // Increment counter for next loop
-            i++;
-            // Brief pause when timer hits 0
-            var pauseVar = setTimeout(function () {
-                clearTimeout(countdownTimer);
 
-                // Trigger next question
-                askTriviaQ();
+            // Increment i if timer timed out (does not happen otherwise)
+            if (flagClicked === 0) {
+                displayFinalScore();
             }
-                , 1000);
         }
     }, 1000);
 }
 
+function displayFinalScore() {
+    // Increment counter for next loop
+    i++;
 
-// Start Game using Start Game button
-gameStarted = false;
+    // If all questions asked, display final score
+    if (i >= triviaQ.length) {
+        $("#questionArea").html("You scored " + score + " out of " + triviaQ.length);
+        $("#Timer").fadeOut(1000, function () { });
+        $("#questionNumber").fadeOut(1000, function () { });
+        $("#scoreBoard").fadeOut(1000, function () { });
+        $(".Ans").fadeOut(1000, function () { });
+        $("#resultMessage").fadeOut(1000, function () { });
 
-startBtn = $('#startButton');
-startBtn.on('click', function (evt) {
-    gameStarted = true;
-    playMode = confirm("Do you want to play Difficult mode? \nDifficult (10 seconds per question):  OK \nEasier (20 seconds per question):  Cancel");
-    console.log("playMode: " + playMode);
-    $("#startButton").fadeOut(1000, function(){
-      });
-    askTriviaQ();
-})
+        console.log("Cue flag waving!");
+        setTimeout(function() {
+            waveFlags();
+    }, 1000);
+
+    // If still more questions to be asked, trigger next question
+} else {
+    // Wait 1.5 seconds before main question timer is reset next question appears
+    clearTimeout(countdownTimer);
+    var pauseVar = setTimeout(function () {
+        $("#resultMessage").text("");
+
+        // Trigger next question
+        askTriviaQ();
+    }
+        , 1000);
+}
+}
+
+// Flag waving
+function waveFlags() {
+
+    var j = 0;
+    for (j = 0; j < triviaQ.length; j++) {
+        setTimeout(function () {
+            k1 = parseInt(Math.floor((Math.random() * triviaQ.length)));
+            k2 = parseInt(Math.floor(Math.random() * 4));
+            console.log("k1 :" + k1);
+            console.log("k2 :" + k2);
+            $("#image1").html("<img src='assets/images/" + triviaQ[k1].response[k2] + ".png' width=150 height=100 />");
+        }, 2000);
+
+            var l = setTimeout(function () {
+            l1 = parseInt(Math.floor((Math.random() * triviaQ.length)));
+            l2 = parseInt(Math.floor(Math.random() * 4));
+            console.log("l1 :" + l1);
+            console.log("l2 :" + l2);
+                $("#image2").html("<img src='assets/images/" + triviaQ[l1].response[l2] + ".png' width=150 height=100 />");
+            }, 2000);
+
+            var m = setTimeout(function () {
+            m1 = parseInt(Math.floor((Math.random() * triviaQ.length)));
+            m2 = parseInt(Math.floor(Math.random() * 4));
+            console.log("m1 :" + m1);
+            console.log("m2 :" + m2);
+                $("#image3").html("<img src='assets/images/" + triviaQ[m1].response[m2] + ".png' width=150 height=100 />");
+            }, 2000);
+
+            var n = setTimeout(function () {
+            n1 = parseInt(Math.floor((Math.random() * triviaQ.length)));
+            n2 = parseInt(Math.floor(Math.random() * 4));
+            console.log("n1 :" + n1);
+            console.log("n2 :" + n2);
+                $("#image4").html("<img src='assets/images/" + triviaQ[n1].response[n2] + ".png' width=150 height=100 />");
+            }, 2000);
+
+    }
+}
+
+
+    // Start Game using Start Game button
+    gameStarted = false;
+
+    startBtn = $('#startButton');
+    startBtn.on('click', function (evt) {
+        gameStarted = true;
+        playMode = confirm("Do you want to play Difficult mode? \nDifficult (10 seconds per question):  OK \nEasier (20 seconds per question):  Cancel");
+        console.log("playMode: " + playMode);
+        $("#startButton").fadeOut(1000, function () {
+        });
+        $("#colA").html("A");
+        $("#colB").html("B");
+        $("#colC").html("C");
+        $("#colD").html("D");
+        askTriviaQ();
+    })
