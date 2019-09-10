@@ -24,12 +24,21 @@ body{
 }
 
 #Timer {
-    /* font-family: 'Space Mono', monospace; */
     font-family: 'digitalClock', sans-serif;
-    font-size: 50px;
+    font-size: 40px;
+}
+
+#startButton {
+    font-size: 30px;
 }
 
 #questionNumber{
+    font-size: 20px;
+    margin: 20px 0px 0px 0px;
+    padding: 10px;
+}
+
+#scoreBoard{
     font-size: 20px;
     margin: 20px 0px 0px 0px;
     padding: 10px;
@@ -41,8 +50,16 @@ body{
     padding: 10px;
 }
 
-#flagArea{
-    /* background-color: white; */
+button {
+    background-color: lightskyblue;
+    border-width: 0px;
+}
+
+.Ans{
+    position: relative;
+    padding-left: auto;
+    padding-right: auto;
+    font-size: 25px;
 }
 
 footer{
@@ -56,6 +73,12 @@ footer{
     color: black;
 }
 
+#ABCD {
+    position: relative;
+    left: 75px;
+    font-size: 30px;
+}
+
 #gamesWon {
     font-size: 30px;
 }
@@ -64,8 +87,10 @@ footer{
     font-size: 30px;
 }
 
-.score{
-    font-size: 75px;
+#resultMessage {
+    position: relative;
+    top: 50px;
+    font-size: 30px;
 }
 
 @media screen and (max-width: 979px){
