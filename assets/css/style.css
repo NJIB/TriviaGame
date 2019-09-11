@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Mina&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Acme&display=swap');
 
 @font-face {
     font-family: 'digitalClock' ;
@@ -10,13 +9,16 @@
 
 header{
     height: 120px;
-    font-family: 'Space Mono', monospace;
-    font-weight: bold;
+    font-family: 'Acme', sans-serif;    font-weight: bold;
     font-size: 50px;
     line-height: 40px;
     color: silver;
     text-align: left;
     padding: 10px;
+}
+
+h1 {
+    font-family: 'Acme', sans-serif;
 }
 
 body{
@@ -33,18 +35,21 @@ body{
 }
 
 #questionNumber{
+    font-family: 'Acme', sans-serif;
     font-size: 20px;
     margin: 20px 0px 0px 0px;
     padding: 10px;
 }
 
 #scoreBoard{
+    font-family: 'Acme', sans-serif;
     font-size: 20px;
     margin: 20px 0px 0px 0px;
     padding: 10px;
 }
 
 #questionArea{
+    font-family: 'Acme', sans-serif;
     font-size: 35px;
     margin: 0px 0px 20px 0px;
     padding: 10px;
@@ -56,6 +61,7 @@ button {
 }
 
 .Ans{
+    font-family: 'Acme', sans-serif;
     position: relative;
     padding-left: auto;
     padding-right: auto;
@@ -75,15 +81,7 @@ footer{
 
 #ABCD {
     position: relative;
-    left: 60px;
-    font-size: 30px;
-}
-
-#gamesWon {
-    font-size: 30px;
-}
-
-#gamesLost {
+    left: 70px;
     font-size: 30px;
 }
 
@@ -91,6 +89,14 @@ footer{
     position: relative;
     top: 50px;
     font-size: 30px;
+}
+
+#pressToRestart {
+    font-family: 'Acme', sans-serif;
+    position: relative;
+    top: 50px;
+    font-size: 30px; 
+    display: none;  
 }
 
 @media screen and (max-width: 979px){

@@ -10,18 +10,6 @@ var gameStarted = false;  // Used to activate the start button, and display main
 var countdownTimer; // Main timer variable
 var flagClicked = 0;  // Indicator to prevent a flag being clicked twice (and messing up the sequence)
 
-var k1 = 0;
-var k2 = 0;
-var l1 = 0;
-var l2 = 0;
-var m1 = 0;
-var m2 = 0;
-var n1 = 0;
-var n2 = 0;
-
-
-
-
 var triviaQ = [
     {
         question: "Let's start with an easy one.  Which of these is the flag of Canada?",
@@ -47,18 +35,18 @@ var triviaQ = [
         question: "Which of these is the flag of Portugal?",
         response: ["Spain", "Portugal", "France", "Italy"],
         correctAns: "B"
-    },
-    {
-        question: "Okay, a tough one: Which of these is the flag of Peru?",
-        response: ["Austria", "Monaco", "Hungary", "Peru"],
-        correctAns: "D"
-    },
-    {
-        question: "Let's make our way to North Africa.  Which of these is the flag of Morocco? Take your time.",
-        response: ["Morocco", "Algeria", "Tunisia", "Egypt"],
-        correctAns: "A"
     }
     // ,
+    // {
+    //     question: "Okay, a tough one: Which of these is the flag of Peru?",
+    //     response: ["Austria", "Monaco", "Hungary", "Peru"],
+    //     correctAns: "D"
+    // },
+    // {
+    //     question: "Let's make our way to North Africa.  Which of these is the flag of Morocco? Take your time.",
+    //     response: ["Morocco", "Algeria", "Tunisia", "Egypt"],
+    //     correctAns: "A"
+    // },
     // {
     //     question: "Fan of a tricolore?  Which of these 3-colored flag is flown in the Republic of Ireland",
     //     response: ["Italy", "Hungary", "Republic of Ireland", "The Netherlands"],
@@ -95,8 +83,8 @@ var triviaQ = [
     //     correctAns: "B"
     // },
     // {
-    //     question: "All these flags making you feel blue?  Keep going!  Which of these blue flags represents Uruguay?",
-    //     response: ["Uruguay", "El Salvador", "Nicaragua", "Honduras"],
+    //     question: "All these flags making you feel blue?  Keep going!  Which of these blue flags represents Greece?",
+    //     response: ["Greece", "El Salvador", "Nicaragua", "Honduras"],
     //     correctAns: "A"
     // },
     // {
@@ -136,7 +124,17 @@ var triviaQ = [
     // },
     // {
     //     question: "Find the Indonesian flag from these.",
-    //     response: ["Monaco", "Austria", "Singapore", "Indonesia"],
+    //     response: ["Monaco", "Poland", "Singapore", "Indonesia"],
+    //     correctAns: "D"
+    // },
+    // {
+    //     question: "Now I bet you're really seeing red.  Which flag is Poland's?",
+    //     response: ["Poland", "Austria", "Indonesia", "Monaco"],
+    //     correctAns: "A"
+    // },
+    // {
+    //     question: "Let's finish off in the Caribbean.  Find the flag for Bermuda?",
+    //     response: ["Barbados", "Dominican Republic", "Cayman Islands", "Bermuda"],
     //     correctAns: "D"
     // }
 
@@ -176,6 +174,8 @@ responseBtn.on('click', function (evt) {
 
         // Register which flag the player selected
         playerResponse = this.value;
+
+        document.getElementById("scoreBoard").style.display = "flex";
 
         // IF the player guesses correctly, display congratulatory message and increment score
         if (playerResponse === triviaQ[i].correctAns) {
@@ -245,88 +245,96 @@ function displayFinalScore() {
     // Increment counter for next loop
     i++;
 
-    // If all questions asked, display final score
+    // If all questions asked, display final score.  Hide other elements.
     if (i >= triviaQ.length) {
         $("#questionArea").html("You scored " + score + " out of " + triviaQ.length);
-        $("#Timer").fadeOut(1000, function () { });
-        $("#questionNumber").fadeOut(1000, function () { });
-        $("#scoreBoard").fadeOut(1000, function () { });
-        $(".Ans").fadeOut(1000, function () { });
-        $("#resultMessage").fadeOut(1000, function () { });
+        document.getElementById("Timer").style.display = "none";
+        // $("#Timer").fadeOut(1000, function () { });
+        document.getElementById("questionNumber").style.display = "none";
+        // $("#questionNumber").fadeOut(1000, function () { });
+        document.getElementById("scoreBoard").style.display = "none";
+        // $("#scoreBoard").fadeOut(1000, function () { });
+        document.getElementById("Ans1").style.display = "none";
+        // $("#Ans1").fadeOut(1000, function () { });
+        document.getElementById("Ans2").style.display = "none";      
+        // $("#Ans2").fadeOut(1000, function () { });
+        document.getElementById("Ans3").style.display = "none";
+        // $("#Ans3").fadeOut(1000, function () { });
+        document.getElementById("Ans4").style.display = "none";
+        // $("#Ans4").fadeOut(1000, function () { });
+        document.getElementById("resultMessage").style.display = "none";
+        // $("#resultMessage").fadeOut(1000, function () { });
 
-        console.log("Cue flag waving!");
-        setTimeout(function() {
-            waveFlags();
-    }, 1000);
+        //Display Play Again button
+        document.getElementById("pressToRestart").style.display = "flex";
 
-    // If still more questions to be asked, trigger next question
-} else {
-    // Wait 1.5 seconds before main question timer is reset next question appears
-    clearTimeout(countdownTimer);
-    var pauseVar = setTimeout(function () {
-        $("#resultMessage").text("");
+        // setTimeout(function () {
+        //     waveFlags();
+        // }, 1000);
 
-        // Trigger next question
-        askTriviaQ();
+        // If still more questions to be asked, trigger next question
+    } else {
+        // Wait 1.5 seconds before main question timer is reset next question appears
+        clearTimeout(countdownTimer);
+        var pauseVar = setTimeout(function () {
+            $("#resultMessage").text("");
+
+            // Trigger next question
+            askTriviaQ();
+        }
+            , 1000);
     }
-        , 1000);
-}
 }
 
 // Flag waving
 function waveFlags() {
-
     var j = 0;
-    for (j = 0; j < triviaQ.length; j++) {
-        setTimeout(function () {
-            k1 = parseInt(Math.floor((Math.random() * triviaQ.length)));
-            k2 = parseInt(Math.floor(Math.random() * 4));
-            console.log("k1 :" + k1);
-            console.log("k2 :" + k2);
-            $("#image1").html("<img src='assets/images/" + triviaQ[k1].response[k2] + ".png' width=150 height=100 />");
-        }, 2000);
-
-            var l = setTimeout(function () {
-            l1 = parseInt(Math.floor((Math.random() * triviaQ.length)));
-            l2 = parseInt(Math.floor(Math.random() * 4));
-            console.log("l1 :" + l1);
-            console.log("l2 :" + l2);
-                $("#image2").html("<img src='assets/images/" + triviaQ[l1].response[l2] + ".png' width=150 height=100 />");
-            }, 2000);
-
-            var m = setTimeout(function () {
-            m1 = parseInt(Math.floor((Math.random() * triviaQ.length)));
-            m2 = parseInt(Math.floor(Math.random() * 4));
-            console.log("m1 :" + m1);
-            console.log("m2 :" + m2);
-                $("#image3").html("<img src='assets/images/" + triviaQ[m1].response[m2] + ".png' width=150 height=100 />");
-            }, 2000);
-
-            var n = setTimeout(function () {
-            n1 = parseInt(Math.floor((Math.random() * triviaQ.length)));
-            n2 = parseInt(Math.floor(Math.random() * 4));
-            console.log("n1 :" + n1);
-            console.log("n2 :" + n2);
-                $("#image4").html("<img src='assets/images/" + triviaQ[n1].response[n2] + ".png' width=150 height=100 />");
-            }, 2000);
-
+    for (j = 0; j < 10; j++) {
+        if (j === 10) { break; }
+        setInterval(function () {
+            $("#image1").html("<img src='assets/images/" + triviaQ[parseInt(Math.floor((Math.random() * triviaQ.length)))].response[parseInt(Math.floor(Math.random() * 4))] + ".png' width=150 height=100 />");
+            $("#image2").html("<img src='assets/images/" + triviaQ[parseInt(Math.floor((Math.random() * triviaQ.length)))].response[parseInt(Math.floor(Math.random() * 4))] + ".png' width=150 height=100 />");
+            $("#image3").html("<img src='assets/images/" + triviaQ[parseInt(Math.floor((Math.random() * triviaQ.length)))].response[parseInt(Math.floor(Math.random() * 4))] + ".png' width=150 height=100 />");
+            $("#image4").html("<img src='assets/images/" + triviaQ[parseInt(Math.floor((Math.random() * triviaQ.length)))].response[parseInt(Math.floor(Math.random() * 4))] + ".png' width=150 height=100 />");
+        }, 1000);
     }
+    $("#image1").empty();
+    $("#image2").empty();
+    $("#image3").empty();
+    $("#image4").empty();
 }
 
+restartBtn = $('#pressToRestart');
+restartBtn.on('click', function (evt) {
+    gameStarted = true;
+    playMode = confirm("Do you want to play Difficult mode? \nDifficult (10 seconds per question):  OK \nEasier (20 seconds per question):  Cancel");
+    document.getElementById("pressToRestart").style.display = "none";
+    // $("#pressToRestart").fadeOut(1000, function () {});
+    document.getElementById("Timer").style.display = "flex";
+    document.getElementById("questionNumber").style.display = "flex";
+    document.getElementById("Ans1").style.display = "flex";
+    document.getElementById("Ans2").style.display = "flex";      
+    document.getElementById("Ans3").style.display = "flex";
+    document.getElementById("Ans4").style.display = "flex";
+    document.getElementById("resultMessage").style.display = "flex";
+    clearTimeout(countdownTimer);
+    i = 0;
+    score = 0;
+    askTriviaQ();
+})
 
-    // Start Game using Start Game button
-    gameStarted = false;
+// Start Game using Start Game button
+gameStarted = false;
 
-    startBtn = $('#startButton');
-    startBtn.on('click', function (evt) {
-        gameStarted = true;
-        playMode = confirm("Do you want to play Difficult mode? \nDifficult (10 seconds per question):  OK \nEasier (20 seconds per question):  Cancel");
-        console.log("playMode: " + playMode);
-        $("#startButton").fadeOut(1000, function () {
-        });
-        $("#colA").html("A");
-        $("#colB").html("B");
-        $("#colC").html("C");
-        $("#colD").html("D");
-        askTriviaQ();
-    })
+startBtn = $('#startButton');
+startBtn.on('click', function (evt) {
+    gameStarted = true;
+    playMode = confirm("Do you want to play Difficult mode? \nDifficult (10 seconds per question):  OK \nEasier (20 seconds per question):  Cancel");
+    console.log("playMode: " + playMode);
+    $("#startButton").fadeOut(1000, function () {});
+    $("#colA").html("A");
+    $("#colB").html("B");
+    $("#colC").html("C");
+    $("#colD").html("D");
+    askTriviaQ();
+})
