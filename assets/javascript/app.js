@@ -305,7 +305,7 @@ startBtn.on('click', function (evt) {
     gameStarted = true;
     playMode = confirm("Do you want to play Difficult mode? \nDifficult (10 seconds per question):  OK \nEasier (20 seconds per question):  Cancel");
     questionCount = prompt("And how many questions would you like to answer? \n You can choose to answer between 1 and " + triviaQ.length);
-    if (questionCount === null) {
+    if (questionCount === null || questionCount === "") {
         questionCount = triviaQ.length;
     }
     $("#startButton").fadeOut(1000, function () {});
