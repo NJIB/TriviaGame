@@ -246,13 +246,13 @@ function displayFinalScore() {
     i++;
 
     // If all questions asked, display final score.  Hide other elements.
-        if (i >= questionCount) {
-            $("#questionArea").html("You scored " + score + " out of " + questionCount);
+    if (i >= questionCount) {
+        $("#questionArea").html("You scored " + score + " out of " + questionCount);
         document.getElementById("Timer").style.display = "none";
         document.getElementById("questionNumber").style.display = "none";
         document.getElementById("scoreBoard").style.display = "none";
         document.getElementById("Ans1").style.display = "none";
-        document.getElementById("Ans2").style.display = "none";      
+        document.getElementById("Ans2").style.display = "none";
         document.getElementById("Ans3").style.display = "none";
         document.getElementById("Ans4").style.display = "none";
         document.getElementById("resultMessage").style.display = "none";
@@ -280,14 +280,14 @@ restartBtn.on('click', function (evt) {
     gameStarted = true;
     playMode = confirm("Which mode would you like to play this time? \nDifficult (10 seconds per question):  OK \nEasier (20 seconds per question):  Cancel");
     questionCount = prompt("And how many questions would you like to answer? \n You can choose to answer between 1 and " + triviaQ.length);
-    if (questionCount === null) {
+    if (questionCount === null || questionCount === "") {
         questionCount = triviaQ.length;
     }
     document.getElementById("pressToRestart").style.display = "none";
     document.getElementById("Timer").style.display = "flex";
     document.getElementById("questionNumber").style.display = "flex";
     document.getElementById("Ans1").style.display = "flex";
-    document.getElementById("Ans2").style.display = "flex";      
+    document.getElementById("Ans2").style.display = "flex";
     document.getElementById("Ans3").style.display = "flex";
     document.getElementById("Ans4").style.display = "flex";
     document.getElementById("resultMessage").style.display = "flex";
@@ -308,6 +308,10 @@ startBtn.on('click', function (evt) {
     if (questionCount === null || questionCount === "") {
         questionCount = triviaQ.length;
     }
-    $("#startButton").fadeOut(1000, function () {});
+    $("#startButton").fadeOut(1000, function () { });
+    $("#colA").html("A");
+    $("#colB").html("B");
+    $("#colC").html("C");
+    $("#colD").html("D");
     askTriviaQ();
 })

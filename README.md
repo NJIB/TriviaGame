@@ -4,11 +4,13 @@ Upon hitting the 'Start Game' button, the player is presented with a choice to s
 	- Easier mode gives the player 20 seconds for each question
 	- Difficult mode gives the player just 10 seconds for each question
 
+The player is then given the option to select the number of questions he/she would like to answer.
+
 Upon selecting the mode, the start buttons and menus are hidden and the game displays a question followed by 4 multiple-choice answers - one is correct, 3 are incorrect.
 
 The player selects his/her choice by clicking on the appropriate flag.
 
-As the question is displayed, a count-down timer is started for each question, allowing the player either 20 or 10 seconds to answer (depending on the mode he/she selected)
+As the question is displayed, a count-down timer is started for each question, allowing the player either 20 or 10 seconds to answer (depending on the mode he/she selected).
 
 If the timer expires, the game treats it as an incorrect answer, and the next question is displayed automatically.
 
