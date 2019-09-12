@@ -10,6 +10,8 @@ var score = 0;  // Game score
 var gameStarted = false;  // Used to activate the start button, and display main content at the right time
 var countdownTimer; // Main timer variable
 var flagClicked = 0;  // Indicator to prevent a flag being clicked twice (and messing up the sequence)
+var r = 0;  // Variable to hold random question index
+var rLog = []; // Array to indices of questions already asked 
 
 var triviaQ = [
     {
@@ -149,11 +151,22 @@ function askTriviaQ() {
         clearAnswers();
         flagClicked = 0;
         $("#questionNumber").html("Question " + (i + 1) + " of " + questionCount);
-        $("#questionArea").html(triviaQ[i].question);
-        $("#image1").html("<img src='assets/images/" + triviaQ[i].response[0] + ".png' width=150 height=100 />");
-        $("#image2").html("<img src='assets/images/" + triviaQ[i].response[1] + ".png' width=150 height=100 />");
-        $("#image3").html("<img src='assets/images/" + triviaQ[i].response[2] + ".png' width=150 height=100 />");
-        $("#image4").html("<img src='assets/images/" + triviaQ[i].response[3] + ".png' width=150 height=100 />");
+
+        //If a question has already been chosen, the program will select another
+        while (rLog.includes(r)) {
+            console.log("rLog records: " + rLog.length);
+            r = parseInt(Math.random() * questionCount);
+        }
+        // Log question, so not asked twice
+        console.log("r: " + r);
+        rLog[i] = r;
+        console.log("rLog: " + r);
+
+        $("#questionArea").html(triviaQ[r].question);
+        $("#image1").html("<img src='assets/images/" + triviaQ[r].response[0] + ".png' width=150 height=100 />");
+        $("#image2").html("<img src='assets/images/" + triviaQ[r].response[1] + ".png' width=150 height=100 />");
+        $("#image3").html("<img src='assets/images/" + triviaQ[r].response[2] + ".png' width=150 height=100 />");
+        $("#image4").html("<img src='assets/images/" + triviaQ[r].response[3] + ".png' width=150 height=100 />");
 
         // Display count down timer, if still questions to be asked
         if (i < questionCount) {
@@ -178,9 +191,9 @@ responseBtn.on('click', function (evt) {
         document.getElementById("scoreBoard").style.display = "flex";
 
         // IF the player guesses correctly, display congratulatory message and increment score
-        if (playerResponse === triviaQ[i].correctAns) {
+        if (playerResponse === triviaQ[r].correctAns) {
             score++;
-            $("#resultMessage").html("Correct! The answer is " + triviaQ[i].correctAns);
+            $("#resultMessage").html("Correct! The answer is " + triviaQ[r].correctAns);
             $("#scoreBoard").html("Your score: " + score + "/" + (i + 1));
 
             // Display country names
@@ -191,7 +204,7 @@ responseBtn.on('click', function (evt) {
 
             // If player guesses incorrectly, display message and update score    
         } else {
-            $("#resultMessage").html("Incorrect - the correct answer is " + triviaQ[i].correctAns);
+            $("#resultMessage").html("Incorrect - the correct answer is " + triviaQ[r].correctAns);
             $("#scoreBoard").html("Your score: " + score + "/" + (i + 1));
 
             // Display country names
@@ -205,10 +218,10 @@ responseBtn.on('click', function (evt) {
 
 // Display answers
 function displayAnswers() {
-    $("#Ans1").html(triviaQ[i].response[0]);
-    $("#Ans2").html(triviaQ[i].response[1]);
-    $("#Ans3").html(triviaQ[i].response[2]);
-    $("#Ans4").html(triviaQ[i].response[3]);
+    $("#Ans1").html(triviaQ[r].response[0]);
+    $("#Ans2").html(triviaQ[r].response[1]);
+    $("#Ans3").html(triviaQ[r].response[2]);
+    $("#Ans4").html(triviaQ[r].response[3]);
 }
 
 // Display answers
@@ -231,12 +244,14 @@ function displayTimer() {
     countdownTimer = setInterval(function () {
         $("#Timer").text(t + " seconds")
         t = t - 1;
-        if (t <= 0) {
+        if (t <= -1) {
 
             // Increment i if timer timed out (does not happen otherwise)
             if (flagClicked === 0) {
                 displayFinalScore();
             }
+            // Test
+            $("#scoreBoard").html("Your score: " + score + "/" + (i));
         }
     }, 1000);
 }
@@ -244,6 +259,7 @@ function displayTimer() {
 function displayFinalScore() {
     // Increment counter for next loop
     i++;
+    console.log("i: " + i);
 
     // If all questions asked, display final score.  Hide other elements.
     if (i >= questionCount) {
@@ -292,6 +308,7 @@ restartBtn.on('click', function (evt) {
     document.getElementById("Ans4").style.display = "flex";
     document.getElementById("resultMessage").style.display = "flex";
     clearTimeout(countdownTimer);
+    rLog = [];
     i = 0;
     score = 0;
     askTriviaQ();
