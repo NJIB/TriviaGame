@@ -11,7 +11,7 @@ var gameStarted = false;  // Used to activate the start button, and display main
 var countdownTimer; // Main timer variable
 var flagClicked = 0;  // Indicator to prevent a flag being clicked twice (and messing up the sequence)
 var r = 0;  // Variable to hold random question index
-var rLog = []; // Array to indices of questions already asked 
+var rLog = []; // Array to hold indices of questions already asked 
 
 var triviaQ = [
     {
@@ -154,13 +154,13 @@ function askTriviaQ() {
 
         //If a question has already been chosen, the program will select another
         while (rLog.includes(r)) {
-            console.log("rLog records: " + rLog.length);
-            r = parseInt(Math.random() * questionCount);
+            r = parseInt(Math.random() * triviaQ.length);
+            console.log("r: " + r);
         }
         // Log question, so not asked twice
-        console.log("r: " + r);
-        rLog[i] = r;
-        console.log("rLog: " + r);
+        rLog.push(r);
+        console.log("rLog records: " + rLog.length);
+        console.log("rLog: " + rLog);
 
         $("#questionArea").html(triviaQ[r].question);
         $("#image1").html("<img src='assets/images/" + triviaQ[r].response[0] + ".png' width=150 height=100 />");

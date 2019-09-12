@@ -6,7 +6,7 @@ Upon hitting the 'Start Game' button, the player is presented with a choice to s
 
 The player is then given the option to select the number of questions he/she would like to answer.
 
-Upon selecting the mode, the start buttons and menus are hidden and the game displays a question followed by 4 multiple-choice answers - one is correct, 3 are incorrect.
+Upon selecting the mode, the start buttons and menus are hidden and the game displays a randomly selected question, followed by 4 multiple-choice answers - one is correct, 3 are incorrect.
 
 The player selects his/her choice by clicking on the appropriate flag.
 
